@@ -47,7 +47,7 @@ def gui(window):
     # txtfld2.place(x = 720, y = 158, height = 25, width = 200)
     bloodGroup(window)
 
-    # ---------------------- Third Row ---------------------------------------
+    # ---------------------- Third Row ----------------------------------------
     lbl = Label(window, text = "Sugar Level : ", font = ("Times New Roman", 20))
     lbl.place(x = 15, y = 210)
     txtfld3 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
