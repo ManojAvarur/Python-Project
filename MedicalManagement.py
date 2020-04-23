@@ -4,10 +4,25 @@ from random import randint as ri
 def genRandInt():
     return ri(1000,10000)
 
+def bloodGroup(window):
+    bloodGroups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"]
+    variable = StringVar(window)
+    variable.set("Select Blood Group")
+    w = OptionMenu(window, variable, *bloodGroups)
+    w.config(font = ("Times New Roman", 16))
+    w.pack()
+    w.place(x = 720, y = 157, height = 28, width = 200)
 
 
-def gui():
+def gui(window):
 
+    # ---------------------- Heading ---------------------------------------
+    lbl = Label(window, text = "Enter Patient Details",font = ("Times New Roman", 26))
+    lbl.place(x = 350, y = 10)
+    lbl = Label(window, text = "----------------------------------",font = ("Times New Roman", 26))
+    lbl.place(x = 305, y = 50, height = 25)
+
+    # ---------------------- First Row ---------------------------------------
     lbl = Label(window, text = "Patient ID : ", font = ("Times New Roman", 20))
     lbl.place(x = 32, y = 90)
     txtfld = Entry(window, bd = 1.5,  font = ("Times New Roman", 16))
@@ -20,6 +35,7 @@ def gui():
     txtfld = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
     txtfld.place(x = 720, y = 98, height = 25, width = 200)
 
+    # ---------------------- Second Row ---------------------------------------
     lbl = Label(window, text = "Phone No : ", font = ("Times New Roman", 20))
     lbl.place(x = 35, y = 150)
     txtfld1 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
@@ -27,9 +43,11 @@ def gui():
 
     lbl = Label(window, text = "Blood Group : ", font = ("Times New Roman", 20))
     lbl.place(x = 550, y = 150)
-    txtfld2 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
-    txtfld2.place(x = 720, y = 158, height = 25, width = 200)
+    # txtfld2 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
+    # txtfld2.place(x = 720, y = 158, height = 25, width = 200)
+    bloodGroup(window)
 
+    # ---------------------- Third Row ---------------------------------------
     lbl = Label(window, text = "Sugar Level : ", font = ("Times New Roman", 20))
     lbl.place(x = 15, y = 210)
     txtfld3 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
@@ -43,11 +61,7 @@ def gui():
 
 window = Tk()
 window.resizable(0,0)
-lbl = Label(window, text = "Enter Patient Details",font = ("Times New Roman", 26))
-lbl.place(x = 350, y = 10)
-lbl = Label(window, text = "----------------------------------",font = ("Times New Roman", 26))
-lbl.place(x = 305, y = 50, height = 25)
-gui()
+gui(window)
 window.title('Patient Medical Report')
 window.geometry("1000x700")
 window.mainloop()
