@@ -109,31 +109,33 @@ class AllMainFunctions:
             lbl = Label(window, text = " mm Hg", font = ("Open Sans",10))
             lbl.place(x = 440, y = 285)
 
-            lbl = Label(window, text = "CBC : ", font = ("Times New Roman", 20))
-            lbl.place(x = 710, y = 270)
+            lbl = Label(window, text = "Creatinine : ", font = ("Times New Roman", 20))
+            lbl.place(x = 650, y = 270)
             self.txtfld_6 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_6.place(x = 790, y = 278, height = 25, width = 200)
+            lbl = Label(window, text = " mg/dl", font = ("Open Sans",10))
+            lbl.place(x = 990, y = 285)
 
         # ---------------------------------- Fifth Row ------------------------------------------------------------------
             lbl = Label(window, text = "Thyroid : ", font = ("Times New Roman", 20))
             lbl.place(x = 130, y = 330)
 
             lbl = Label(window, text = "T3 = ", font = ("Times New Roman", 16))
-            lbl.place(x = 260, y = 334)
+            lbl.place(x = 270, y = 334)
             self.txtfld_7 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_7.place(x = 320, y = 338, height = 25, width = 100)
             lbl = Label(window, text = " ng/dL", font = ("Open Sans",10))
             lbl.place(x = 420, y = 341)
 
             lbl = Label(window, text = "T4 = ", font = ("Times New Roman", 16))
-            lbl.place(x = 510, y = 334)
+            lbl.place(x = 520, y = 334)
             self.txtfld_8 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_8.place(x = 570, y = 338, height = 25, width = 100)
             lbl = Label(window, text = " mIU/L", font = ("Open Sans",10))
             lbl.place(x = 670, y = 341)
 
             lbl = Label(window, text = "TSH = ", font = ("Times New Roman", 16))
-            lbl.place(x = 770, y = 334)
+            lbl.place(x = 775, y = 334)
             self.txtfld_9 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_9.place(x = 840, y = 338, height = 25, width = 100)
             lbl = Label(window, text = " mIU/L", font = ("Open Sans",10))
@@ -158,7 +160,7 @@ class AllMainFunctions:
             lbl.place(x = 670, y = 405)
 
             lbl = Label(window, text = "ALP = ", font = ("Times New Roman", 16))
-            lbl.place(x = 770, y = 394)
+            lbl.place(x = 775, y = 394)
             self.txtfld_12 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_12.place(x = 840, y = 398, height = 25, width = 100)
             lbl = Label(window, text = " IU/L", font = ("Open Sans",10))
