@@ -1,28 +1,32 @@
 from tkinter import *
 from random import randint as ri
 
-def genRandInt():
-    return ri(1000,10000)
+class AllMainFunctions:
+    def clear_text():
+            txtfld_1.delete(0, END)
+            txtfld_1.insert(0, "")
 
-def bloodGroup( window ):
-    bloodGroups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"]
-    variable = StringVar(window)
-    variable.set("Select Blood Group")
-    w = OptionMenu(window, variable, *bloodGroups)
-    w.config(font = ("Times New Roman", 16))
-    w.pack()
-    w.place(x = 790, y = 157, height = 28, width = 200)
+    def genRandInt():
+        return ri(1000,10000)
 
+    def bloodGroup( window ):
+        bloodGroups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"]
+        variable = StringVar(window)
+        variable.set("Select Blood Group")
+        w = OptionMenu(window, variable, *bloodGroups)
+        w.config(font = ("Times New Roman", 16))
+        w.pack()
+        w.place(x = 790, y = 157, height = 28, width = 200)
 
-def gui( window ):
+    def gui( window ):
 
-# ---------------------------------- Heading Row ----------------------------------------------------------------
+# ---------------------------------- Heading Row ----------------------------------------------------------------   
     lbl = Label(window, text = "Enter Patient Details",font = ("Times New Roman", 26))
     lbl.place(x = 395, y = 10)
     lbl = Label(window, text = "----------------------------------",font = ("Times New Roman", 26))
     lbl.place(x = 350, y = 50, height = 25)
 
-# ---------------------------------- First Row ------------------------------------------------------------------
+ # ---------------------------------- First Row ------------------------------------------------------------------
     lbl = Label(window, text = "Patient ID : ", font = ("Times New Roman", 20))
     lbl.place(x = 102, y = 90)
     txtfld_0 = Entry(window, bd = 1.5,  font = ("Times New Roman", 16))
@@ -122,6 +126,10 @@ def gui( window ):
     txtfld_7.place(x = 840, y = 398, height = 25, width = 100)
     lbl = Label(window, text = " IU/L", font = ("Open Sans",10))
     lbl.place(x = 940, y = 405)
+
+    Btn = Button(window, text ="Reset", bd = 6, font = ("Open Sans", 16), command = txtfld_1.clear_text())
+    Btn.pack()
+    Btn.place(x = 580, y = 460, height = 50, width = 100)
 
 window = Tk()
 window.resizable(0,0)
