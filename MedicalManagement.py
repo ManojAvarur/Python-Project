@@ -8,40 +8,40 @@ class AllMainFunctions:
             self.variable.set("Select Blood Group")
 
             self.txtfld_1.delete(0, 'end')
-            self.txtfld_1.insert(END, "")
+           # self.txtfld_1.insert(END, "")
 
             self.txtfld_2.delete(0, 'end')
-            self.txtfld_2.insert(END, "")
+            # self.txtfld_2.insert(END, "")
 
             self.txtfld_3.delete(0, 'end')
-            self.txtfld_3.insert(END, "")
+            # self.txtfld_3.insert(END, "")
 
             self.txtfld_4.delete(0, 'end')
-            self.txtfld_4.insert(END, "")
+            # self.txtfld_4.insert(END, "")
 
             self.txtfld_5.delete(0, 'end')
-            self.txtfld_5.insert(END, "")
+            # self.txtfld_5.insert(END, "")
 
             self.txtfld_6.delete(0, 'end')
-            self.txtfld_6.insert(END, "")
+            # self.txtfld_6.insert(END, "")
 
             self.txtfld_7.delete(0, 'end')
-            self.txtfld_7.insert(END, "")
+            # self.txtfld_7.insert(END, "")
 
             self.txtfld_8.delete(0, 'end')
-            self.txtfld_8.insert(END, "")
+            # self.txtfld_8.insert(END, "")
 
             self.txtfld_9.delete(0, 'end')
-            self.txtfld_9.insert(END, "")
+            # self.txtfld_9.insert(END, "")
 
             self.txtfld_10.delete(0, 'end')
-            self.txtfld_10.insert(END, "")
+            # self.txtfld_10.insert(END, "")
 
             self.txtfld_11.delete(0, 'end')
-            self.txtfld_11.insert(END, "")
+            # self.txtfld_11.insert(END, "")
 
             self.txtfld_12.delete(0, 'end')
-            self.txtfld_12.insert(END, "")
+            # self.txtfld_12.insert(END, "")
 
     def genRandInt( self ):
         return ri(1000,10000)
