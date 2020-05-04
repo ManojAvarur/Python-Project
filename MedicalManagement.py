@@ -239,7 +239,9 @@ class AllMainFunctions:
     
 
 try:
-    mydb = my.connector.connect(host="127.0.0.1", user="root", passwd="", database="patient")
+    usr = "root"#input("Enter User Name : ")
+    pwd = "root"#input("Enter The Password : ")
+    mydb = my.connector.connect(host="127.0.0.1", user=usr, password=pwd , database="patient")
 except Exception as e:
     error = """Check Your Connection
     1. MySQL Servers
