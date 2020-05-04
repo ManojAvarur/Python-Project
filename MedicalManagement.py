@@ -5,50 +5,70 @@ import mysql as my
 from mysql import connector
 
 class AllMainFunctions:
+
+    def insert( self ):
+        check = True
+        try:
+            cur = mydb.cursor()
+            idd = int(self.txtfld_0.get())
+            name = str(self.txtfld_1.get())
+            phno = int(self.txtfld_2.get())
+            if len(str(phno)) != 10:
+                messagebox.showwarning("Warning","Phone numner is incorrect")
+                check = False
+            blgrp = str(self.variable.get())
+            fbs = str(self.txtfld_3.get())
+            ppbs = float(self.txtfld_4.get())
+            bp = float(self.txtfld_5.get())
+            creat = float(self.txtfld_6.get())
+            t3 = float(self.txtfld_7.get())
+            t4 = float(self.txtfld_8.get())
+            tsh = float(self.txtfld_9.get())
+            ast = float(self.txtfld_10.get())
+            alt = float(self.txtfld_11.get())
+            alp =float(self.txtfld_12.get())
+            
+        except Exception as e:
+            check = False
+            error = "Values can not be null or Wrong type of value inserted"# {}".format(e)
+            messagebox.showwarning("Warning",error)
+
+        if check:  
+            try:
+                if blgrp == "Select Blood Group":
+                    messagebox.showwarning("Warning", "Select Blood Group")
+                else:
+                    sql = "INSERT INTO patient VALUES ({},\'{}\',{},\'{}\',{},{},{},{},{},{},{},{},{},{})".format(idd,name,phno,blgrp,fbs,ppbs,bp,creat,t3,t4,tsh,ast,alt,alp)
+                    # print(sql)
+                    cur.execute(sql)
+                    mydb.commit()
+                    cur.close()
+                    self.clear_text()
+                    self.txtfld_0.destroy()
+                    self.patientIDgen()
+
+            except Exception as e:
+                error = "Values not inserted into database : {}".format(e)
+                messagebox.showerror("Error",error)
     
     def clear_text( self ): 
 
         self.variable.set("Select Blood Group")
-
         self.txtfld_1.delete(0, 'end')
-        # self.txtfld_1.insert(END, "")
-
         self.txtfld_2.delete(0, 'end')
-        # self.txtfld_2.insert(END, "")
-
         self.txtfld_3.delete(0, 'end')
-        # self.txtfld_3.insert(END, "")
-
         self.txtfld_4.delete(0, 'end')
-        # self.txtfld_4.insert(END, "")
-
         self.txtfld_5.delete(0, 'end')
-        # self.txtfld_5.insert(END, "")
-
         self.txtfld_6.delete(0, 'end')
-        # self.txtfld_6.insert(END, "")
-
         self.txtfld_7.delete(0, 'end')
-        # self.txtfld_7.insert(END, "")
-
         self.txtfld_8.delete(0, 'end')
-        # self.txtfld_8.insert(END, "")
-
         self.txtfld_9.delete(0, 'end')
-        # self.txtfld_9.insert(END, "")
-
         self.txtfld_10.delete(0, 'end')
-        # self.txtfld_10.insert(END, "")
-
         self.txtfld_11.delete(0, 'end')
-        # self.txtfld_11.insert(END, "")
-
         self.txtfld_12.delete(0, 'end')
-        # self.txtfld_12.insert(END, "")
 
     def genRandInt( self ):
-
-        
+   
         try:
             cur = mydb.cursor()
             cur.execute("SELECT ID FROM patient")
@@ -216,45 +236,7 @@ class AllMainFunctions:
             Btn.pack()
             Btn.place(x = 580, y = 460, height = 50, width = 100)
 
-    def insert( self ):
-        check = False
-        try:
-            cur = mydb.cursor()
-            idd = int(self.txtfld_0.get())
-            name = str(self.txtfld_1.get())
-            phno = int(self.txtfld_2.get())
-            blgrp = str(self.variable.get())
-            fbs = str(self.txtfld_3.get())
-            ppbs = float(self.txtfld_4.get())
-            bp = float(self.txtfld_5.get())
-            creat = float(self.txtfld_6.get())
-            t3 = float(self.txtfld_7.get())
-            t4 = float(self.txtfld_8.get())
-            tsh = float(self.txtfld_9.get())
-            ast = float(self.txtfld_10.get())
-            alt = float(self.txtfld_11.get())
-            alp =float(self.txtfld_12.get())
-            check = True
-        except:
-            messagebox.showwarning("Warning","Values can not be null")
-
-        if check:  
-            try:
-                if blgrp == "Select Blood Group":
-                    messagebox.showwarning("Warning", "Select Blood Group")
-                else:
-                    sql = "INSERT INTO patient VALUES ({},\'{}\',{},\'{}\',{},{},{},{},{},{},{},{},{},{})".format(idd,name,phno,blgrp,fbs,ppbs,bp,creat,t3,t4,tsh,ast,alt,alp)
-                    print(sql)
-                    cur.execute(sql)
-                    mydb.commit()
-                    cur.close()
-                    self.clear_text()
-                    self.txtfld_0.destroy()
-                    self.patientIDgen()
-
-            except Exception as e:
-                error = "Values not inserted into database : {}".format(e)
-                messagebox.showerror("Error",error)
+    
 
 try:
     mydb = my.connector.connect(host="127.0.0.1", user="root", passwd="", database="patient")
