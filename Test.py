@@ -1,50 +1,92 @@
 from tkinter import *
-class All:
-    def __init__(self, x):
-        self.win = x
-        self.t1 = Entry(bd=3)
-        self.t1.place(x=150,y=150)
-        # self.t2 = Entry(bd=3)
-        # self.t2.place(x=200,y=200)
-        self.b1 = Button(self.win, text='Show', command=self.clear)
-        self.b1.pack()
-
-
-    def clear(self):
-        lbl = Label(self.win, text = str(self.t1.get()) ,font = ("Times New Roman", 26))
-        lbl.place(x=250,y=250)
-        self.t1.delete(0, 'end')
-        self.t1.insert(END, "")
-        
-        #     def add(self):
-#         self.t3.delete(0, 'end')
-#         num1 = int(self.t1.get())
-#         num2 = int(self.t2.get())
-#         result = num1+num2
-#         self.t3.insert(END, str(result))
 
 
 
-    # def add(self,win):
-    #     t1 = Entry(bd=3)
-    #     t1.place(x=150,y=150)
-    #     b1 = Button(win, text='Show', command=clear(win))
-
-
-
+def prt():
+    print(variable.get())
 
 window = Tk()
-All(window)
-# ubj.add(window)
-window.title('Hello Python')
-window.geometry("1000x1000")
+window.resizable(0,0)
+bloodGroups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"]
+variable = StringVar(window)
+variable.set("Select Blood Group")
+w = OptionMenu(window, variable, *bloodGroups)
+w.config(font = ("Times New Roman", 16))
+w.pack()
+
+Btn = Button(window, text ="Submit", bd = 6, font = ("Open Sans", 16), command = prt)
+Btn.pack()
+Btn.place(x = 380, y = 460, height = 50, width = 100)
+
+window.title("Patient Medical Report")
+window.geometry("1050x550")
 window.mainloop()
 
+# w.place(x = 790, y = 157, height = 28, width = 200)
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+import tkinter
+from tkinter import messagebox
+
+# hide main window
+root = tkinter.Tk()
+root.withdraw()
+
+# message box display
+messagebox.showerror("Error", "Patient-ID could not be generated please contact the developer")
+messagebox.showwarning("Warning","Warning message")
+messagebox.showinfo("Information","Informative message")
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# from tkinter import *
+# class All:
+#     def __init__(self, x):
+# win = x
+# t1 = Entry(bd=3)
+# t1.place(x=150,y=150)
+#         # self.t2 = Entry(bd=3)
+#         # self.t2.place(x=200,y=200)
+# b1 = Button(self.win, text='Show', command=self.clear)
+# b1.pack()
+
+
+#     def clear(self):
+#         lbl = Label(self.win, text = str(self.t1.get()) ,font = ("Times New Roman", 26))
+#         lbl.place(x=250,y=250)
+# t1.delete(0, 'end')
+# t1.insert(END, "")
+
+
+# window = Tk()
+# All(window)
+# # ubj.add(window)
+# window.title('Hello Python')
+# window.geometry("1000x1000")
+# window.mainloop()
+
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -54,39 +96,39 @@ window.mainloop()
 
 # class MyWindow:
 #     def __init__(self, win):
-#         self.lbl1 = Label(win, text='First number')
-#         self.lbl2 = Label(win, text='Second number')
-#         self.lbl3 = Label(win, text='Result')
-#         self.t1 = Entry(bd=3)
-#         self.t2 = Entry()
-#         self.t3 = Entry()
-#         self.btn1 = Button(win, text='Add')
-#         self.btn2 = Button(win, text='Subtract')
-#         self.lbl1.place(x=100, y=50)
-#         self.t1.place(x=200, y=50)
-#         self.lbl2.place(x=100, y=100)
-#         self.t2.place(x=200, y=100)
-#         self.b1 = Button(win, text='Add', command=self.add)
-#         self.b2 = Button(win, text='Subtract')
-#         self.b2.bind('<Button-1>', self.sub)
-#         self.b1.place(x=100, y=150)
-#         self.b2.place(x=200, y=150)
-#         self.lbl3.place(x=100, y=200)
-#         self.t3.place(x=200, y=200)
+# lbl1 = Label(win, text='First number')
+# lbl2 = Label(win, text='Second number')
+# lbl3 = Label(win, text='Result')
+# t1 = Entry(bd=3)
+# t2 = Entry()
+# t3 = Entry()
+# btn1 = Button(win, text='Add')
+# btn2 = Button(win, text='Subtract')
+# lbl1.place(x=100, y=50)
+# t1.place(x=200, y=50)
+# lbl2.place(x=100, y=100)
+# t2.place(x=200, y=100)
+# b1 = Button(win, text='Add', command=self.add)
+# b2 = Button(win, text='Subtract')
+# b2.bind('<Button-1>', self.sub)
+# b1.place(x=100, y=150)
+# b2.place(x=200, y=150)
+# lbl3.place(x=100, y=200)
+# t3.place(x=200, y=200)
 
 #     def add(self):
-#         self.t3.delete(0, 'end')
+# t3.delete(0, 'end')
 #         num1 = int(self.t1.get())
 #         num2 = int(self.t2.get())
 #         result = num1+num2
-#         self.t3.insert(END, str(result))
+# t3.insert(END, str(result))
 
 #     def sub(self, event):
-#         self.t3.delete(0, 'end')
+# t3.delete(0, 'end')
 #         num1 = int(self.t1.get())
 #         num2 = int(self.t2.get())
 #         result = num1-num2
-#         self.t3.insert(END, str(result))
+# t3.insert(END, str(result))
 
 
 # window = Tk()

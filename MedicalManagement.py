@@ -1,6 +1,8 @@
 from tkinter import *
+from tkinter import messagebox
 from random import randint as ri
-
+import mysql as my
+from mysql import connector
 class AllMainFunctions:
     
     def clear_text( self ): 
@@ -44,12 +46,46 @@ class AllMainFunctions:
         # self.txtfld_12.insert(END, "")
 
     def genRandInt( self ):
-        return ri(1000,10000)
+
+        
+        try:
+            cur = mydb.cursor()
+            cur.execute("SELECT ID FROM patient")
+            result = cur.fetchall()
+        except Exception as e:
+            messagebox.showerror("Error",e)
+            exit()
+
+        lists = []
+        for row in result:
+              lists.append(row[0])
+
+        breakCheck = False
+        count = 0
+        while True:
+            r = ri(1000,10000)
+            count += 1
+            # print(count)
+            if not r in lists:
+                break
+
+            if count == 50:
+                breakCheck = True
+                break
+
+        if breakCheck:    
+            messagebox.showerror("Error", "Patient-ID could not be generated please contact the developer")
+            exit()
+            # cur.close()
+            # return "ERROR 110"
+        else:
+            cur.close()
+            return r       
 
     def bloodGroup(self, window ):
-        bloodGroups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"]
+        bloodGroups = ["Select Blood Group","A+","A-","B+","B-","O+","O-","AB+","AB-"]
         self.variable = StringVar(window)
-        self.variable.set("Select Blood Group")
+        self.variable.set(bloodGroups[0])
         self.w = OptionMenu(window, self.variable, *bloodGroups)
         self.w.config(font = ("Times New Roman", 16))
         self.w.pack()
@@ -168,7 +204,7 @@ class AllMainFunctions:
 
         # ---------------------------------- Sevanth Row (Buttons)--------------------------------------------------------
 
-            Btn = Button(window, text ="Submit", bd = 6, font = ("Open Sans", 16))
+            Btn = Button(window, text ="Submit", bd = 6, font = ("Open Sans", 16), command = self.insert)
             Btn.pack()
             Btn.place(x = 380, y = 460, height = 50, width = 100)
 
@@ -176,12 +212,55 @@ class AllMainFunctions:
             Btn.pack()
             Btn.place(x = 580, y = 460, height = 50, width = 100)
 
+    def insert( self ):
+        check = False
+        try:
+            cur = mydb.cursor()
+            idd = int(self.txtfld_0.get())
+            name = str(self.txtfld_1.get())
+            phno = int(self.txtfld_2.get())
+            blgrp = str(self.variable.get())
+            fbs = str(self.txtfld_3.get())
+            ppbs = float(self.txtfld_4.get())
+            bp = float(self.txtfld_5.get())
+            creat = float(self.txtfld_6.get())
+            t3 = float(self.txtfld_7.get())
+            t4 = float(self.txtfld_8.get())
+            tsh = float(self.txtfld_9.get())
+            ast = float(self.txtfld_10.get())
+            alt = float(self.txtfld_11.get())
+            alp =float(self.txtfld_12.get())
+            check = True
+        except:
+            messagebox.showwarning("Warning","Values can not be null")
+
+        if check:  
+            try:
+                if blgrp == "Select Blood Group":
+                    messagebox.showwarning("Warning", "Select Blood Group")
+                else:
+                    sql = "INSERT INTO patient VALUES ({},\'{}\',{},\'{}\',{},{},{},{},{},{},{},{},{},{})".format(idd,name,phno,blgrp,fbs,ppbs,bp,creat,t3,t4,tsh,ast,alt,alp)
+                    print(sql)
+                    cur.execute(sql)
+                    mydb.commit()
+                    self.clear_text()
+                    self.__init__(window)
+
+            except Exception as e:
+                error = "Values not inserted into database {}".format(e)
+                messagebox.showerror("Error",error)
+            
+
+
+try:
+    mydb = my.connector.connect(host="127.0.0.1", user="root", passwd="", database="patient")
+except Exception as e:
+    print(e)
+    exit()
 
 window = Tk()
 window.resizable(0,0)
-
 AllMainFunctions(window)
-
 window.title("Patient Medical Report")
 window.geometry("1050x550")
 window.mainloop()
