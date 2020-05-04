@@ -244,7 +244,8 @@ except Exception as e:
     error = """Check Your Connection
     1. MySQL Servers
     2. User-ID or Password
-    3. {}""".format(e)
+    
+{}""".format(e)
     messagebox.showerror("Error",error)
     exit()
 
