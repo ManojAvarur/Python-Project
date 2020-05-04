@@ -3,6 +3,7 @@ from tkinter import messagebox
 from random import randint as ri
 import mysql as my
 from mysql import connector
+
 class AllMainFunctions:
     
     def clear_text( self ): 
@@ -91,6 +92,12 @@ class AllMainFunctions:
         self.w.pack()
         self.w.place(x = 790, y = 157, height = 28, width = 200)
 
+    def patientIDgen(self):
+        self.txtfld_0 = Entry(window, bd = 1.5,  font = ("Times New Roman", 16))
+        self.txtfld_0.insert(0,self.genRandInt())
+        self.txtfld_0.config(state = 'disabled')
+        self.txtfld_0.place(x = 240, y = 98, height = 25, width = 200)
+    
     def __init__(self, window):
         
         # ---------------------------------- Heading Row ----------------------------------------------------------------
@@ -102,10 +109,7 @@ class AllMainFunctions:
         # ---------------------------------- First Row ------------------------------------------------------------------
             lbl = Label(window, text = "Patient ID : ", font = ("Times New Roman", 20))
             lbl.place(x = 102, y = 90)
-            self.txtfld_0 = Entry(window, bd = 1.5,  font = ("Times New Roman", 16))
-            self.txtfld_0.insert(0,self.genRandInt())
-            self.txtfld_0.config(state = 'disabled')
-            self.txtfld_0.place(x = 240, y = 98, height = 25, width = 200)
+            self.patientIDgen()
 
             lbl = Label(window, text = "Name : ", font = ("Times New Roman", 20))
             lbl.place(x = 700, y = 90)
@@ -243,19 +247,23 @@ class AllMainFunctions:
                     print(sql)
                     cur.execute(sql)
                     mydb.commit()
+                    cur.close()
                     self.clear_text()
-                    self.__init__(window)
+                    self.txtfld_0.destroy()
+                    self.patientIDgen()
 
             except Exception as e:
-                error = "Values not inserted into database {}".format(e)
+                error = "Values not inserted into database : {}".format(e)
                 messagebox.showerror("Error",error)
-            
-
 
 try:
     mydb = my.connector.connect(host="127.0.0.1", user="root", passwd="", database="patient")
 except Exception as e:
-    print(e)
+    error = """Check Your Connection
+    1. MySQL Servers
+    2. User-ID or Password
+    3. {}""".format(e)
+    messagebox.showerror("Error",error)
     exit()
 
 window = Tk()
