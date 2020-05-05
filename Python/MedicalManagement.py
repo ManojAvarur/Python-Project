@@ -239,10 +239,9 @@ class AllMainFunctions:
     
 
 try:
-    usr = "root"#input("Enter User Name : ")
-    # pwd = "root"#input("Enter The Password : ")
     op = open("Password\pass.txt")
-    pwd = op.read()
+    usr = op.readline().replace('\n','')
+    pwd = op.readline().replace('\n','')
 
     mydb = my.connector.connect(host="127.0.0.1", user=usr, password=pwd , database="patient")
 except Exception as e:
@@ -252,6 +251,7 @@ except Exception as e:
     3. Re-Connect using diffrent User-Id and Password
     
 {}""".format(e)
+    print(e)
     messagebox.showerror("Error",error)
     exit()
 
@@ -260,4 +260,16 @@ window.resizable(0,0)
 AllMainFunctions(window)
 window.title("Patient Medical Report")
 window.geometry("1050x550")
+
+windowWidth = window.winfo_reqwidth()
+windowHeight = window.winfo_reqheight()
+# print("Width",windowWidth,"Height",windowHeight)
+ 
+# Gets both half the screen width/height and window width/height
+positionRight = int(window.winfo_screenwidth()/3 - windowWidth)
+positionDown = int(window.winfo_screenheight()/3 - windowHeight)
+ 
+# Positions the window in the center of the page.
+window.geometry("+{}+{}".format(positionRight, positionDown))
+
 window.mainloop()

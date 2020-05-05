@@ -3,19 +3,24 @@ import os
 from tkinter import messagebox
 import mysql as my
 from mysql import connector
+from concurrent import futures
+
 
 class AllMainFunctions:
 
-    
+    def realcallback(self):
+        os.system(self.filename)
+
     def callBack(self, val):
 
         if val == 1:
-            filename = "Python\MedicalManagement.py"
-            os.system(filename)
+            self.filename = "Python\MedicalManagement.py"   
+            root.after(3, self.realcallback)
+           
 
         elif val == 2:
-            filename = "Python\MedicalManagement.py"
-            os.system(filename)
+            self.filename = "Python\MedicalManagement.py"
+            root.after(3, self.realcallback)
 
         else:
             exit()
@@ -51,14 +56,20 @@ class AllMainFunctions:
             if os.path.exists("Password\pass.txt"):
                 os.remove("Password\pass.txt")
 
-            op = open('Password\pass.txt','w')                   
+            op = open('Password\pass.txt','w')
+            op.write(ud)
+            op.write("\n")                   
             op.write(pd)
             op.close() 
             mydb.close()
             self.Buttons()
             
-        except:
-            messagebox.showwarning("Warning","Invalid username or password")
+        except Exception as e:
+            if str(e) == "2003: Can't connect to MySQL server on '127.0.0.1:3306' (10061 No connection could be made because the target machine actively refused it)":
+                messagebox.showerror("Database Connection Error!","Connection to the database could not be established")
+            else:  
+                error = "Invalid username or password"
+                messagebox.showwarning("Warning",error)
 
 
     def LoginCheck(self):
@@ -82,11 +93,23 @@ root.resizable(0,0)
 root.title("Patient Medical Report")
 root.geometry("500x550")
 
+# Gets the requested values of the height and widht.
+windowWidth = root.winfo_reqwidth()
+windowHeight = root.winfo_reqheight()
+# print("Width",windowWidth,"Height",windowHeight)
+ 
+# Gets both half the screen width/height and window width/height
+positionRight = int(root.winfo_screenwidth()/2 - windowWidth)
+positionDown = int(root.winfo_screenheight()/3 - windowHeight)
+ 
+# Positions the window in the center of the page.
+root.geometry("+{}+{}".format(positionRight, positionDown))
+
 lbl11 = Label(root, text = "Patient Health Management System", font = ("Times New Roman", 22)) 
 lbl11.place(x = 50, y = 25)  
 
 lbl21 = Label(root, text = "______________________________________________________________________")  
-lbl21.place(x = 75, y = 55, height = 15) 
+lbl21.place(x = 75, y = 60, height = 13) 
 
 lbl11 = Label(root, text = "© 2020 - 2050 JSSATEB. CSE. All Rights Reserved.", font = ("Open Sans", 10))
 #lbl11.place(x = 75, y = 550, height = 15) 
