@@ -19,7 +19,7 @@ class AllMainFunctions:
            
 
         elif val == 2:
-            self.filename = "Python\MedicalManagement.py"
+            self.filename = "Python\RecordDisplay.py"
             root.after(3, self.realcallback)
 
         else:
