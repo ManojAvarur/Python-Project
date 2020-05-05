@@ -39,7 +39,7 @@ except Exception as e:
 
 root = Tk()
 
-# If you are runiing this in a Windows use the bellow code
+# If you are runiing this in a Ubuntu use the bellow code
 root.state('zoomed')
 
 # If you are runiing this in a Ubuntu use the bellow code
