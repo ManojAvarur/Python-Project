@@ -6,25 +6,37 @@ from mysql import connector
 from concurrent import futures
 import threading as t
 
+class  myThread (t.Thread):
+    def __init__(self, fileName):
+        t.Thread.__init__(self)
+        self.fn = fileName
+
+      
+    def run(self):
+            os.system(self.fn)
+       
 
 class AllMainFunctions:
-
-    def realcallback(self):
-        os.system(self.filename)
 
     def callBack(self, val):
 
         if val == 1:
-            self.filename = "Python\MedicalManagement.py"   
-            root.after(3, self.realcallback)
+            
+            filename = "Python\MedicalManagement.py"   
+            self.obj = myThread(filename)
+            self.obj.start()
            
 
         elif val == 2:
-            self.filename = "Python\RecordDisplay.py"
-            root.after(3, self.realcallback)
+            filename = "Python\RecordDisplay.py"
+            self.obj = myThread(filename)
+            self.obj.start()
 
         else:
-            exit()
+                if self.obj.isAlive():
+                    messagebox.showerror("Error","Close All The Tabs!")
+                else:
+                    exit()
 
     def Buttons(self):
 
