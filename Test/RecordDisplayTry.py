@@ -12,9 +12,17 @@ class Display:
         total_rows = len(result)
         total_columns = len(result[0])
 
+        count = 0    
         for i in range(total_rows):
             for j in range(total_columns):
-                
+                if count < 1:
+                    self.e = Label(root,text = "ID", width=10, fg='black', bd = 5, font=('Arial',16,'bold'))
+                    self.e.grid(row=i, column=j) 
+
+                count += 1
+                # txt = Text(root)
+                # txt.insert(INSERT, "--------------------------------------------------------------------------------------")
+                # txt.grid(row=i) 
                 self.e = Label(root,text = result[i][j], width=10, fg='black', bd = 5, font=('Arial',16,'bold')) 
                 self.e.grid(row=i, column=j) 
                 # self.e.insert(END, result[i][j])
