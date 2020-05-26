@@ -1,66 +1,116 @@
+
 import tkinter as tk
 from tkinter import ttk
+import mysql as my
+from mysql import connector
 
-class Scrollable(tk.Frame):
-    """
-       Make a frame scrollable with scrollbar on the right.
-       After adding or removing widgets to the scrollable frame, 
-       call the update() method to refresh the scrollable area.
-    """
+def show():
 
-    def __init__(self, frame, width=16):
+    # tempList = [['Jim', '0.33', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67'], 
+    # ['Dave', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67'], 
+    # ['James', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67'], 
+    # ['Eden', '0.5', '0.67', '0.67', '0.67', '0.67', '0.67', '0.67']]
+    # tempList.sort(key=lambda e: e[1], reverse=True)
 
-        scrollbar = tk.Scrollbar(frame, width=width)
-        scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand=False)
+    # tempList = [
+    #     (1355, 'sdfsdf', 456564546, 'A+', 45.23, 45.23, 45.23, 45.23, 45.23, 45.23, 45.23, 45.23, 45.23, 45.23), #14
+    #     (1422, 'someone', 951475369, 'B+', 14.12, 14.12, 14.12, 14.12, 14.12, 14.12, 14.12, 14.12, 14.12, 14.12),
+    #     (1647, 'fdf', 123, 'B-', 17.2, 17.2, 17.2, 17.2, 17.2, 17.2, 17.2, 17.2, 17.2, 17.2),
+    #     (1716, '12.12', 123456789, 'B-', 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12),
+    #     (1971, 'asdasd', 123465789, 'A+', 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12)
+    # ]
 
-        self.canvas = tk.Canvas(frame, yscrollcommand=scrollbar.set)
-        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    for i, (name, score, a, b, c, d, e, f, g, h, i ,j , k, l ) in enumerate(tempList, start=1):
+        listBox.insert("", "end", values=(i, name, score, a, b, c, d, e, f, g, h, i ,j , k, l))
 
-        scrollbar.config(command=self.canvas.yview)
+scores = tk.Tk() 
+label = tk.Label(scores, text="High Scores", font=("Arial",30)).grid(row=0, columnspan=3)
+# create Treeview with 3 columns
+cols = ('Position', 'Name', 'Score','Hello Assehole','Hello Asshoale','Hello Assdhole','Hello Asshgole','Helloh Asshole','Hello Assfhole','Hello Adesshoale','Hello Aetssdhole','Hellgdo Assshgole','Helloh Aasshole','Hello Aasssfhole')
+listBox = ttk.Treeview(scores, columns=cols, show='headings')
+# set column headings
+for col in cols:
+    listBox.heading(col, text=col)    
+listBox.grid(row=1, column=0, columnspan=1)
 
-        self.canvas.bind('<Configure>', self.__fill_canvas)
+showScores = tk.Button(scores, text="Show scores", width=15, command=show).grid(row=4, column=0)
+closeButton = tk.Button(scores, text="Close", width=15, command=exit).grid(row=4, column=1)
 
-        # base class initialization
-        tk.Frame.__init__(self, frame)         
-
-        # assign this obj (the inner frame) to the windows item of the canvas
-        self.windows_item = self.canvas.create_window(0,0, window=self, anchor=tk.NW)
+scores.mainloop()
 
 
-    def __fill_canvas(self, event):
-        "Enlarge the windows item to the canvas width"
 
-        canvas_width = event.width
-        self.canvas.itemconfig(self.windows_item, width = canvas_width)        
 
-    def update(self):
-        "Update the canvas and the scrollregion"
 
-        self.update_idletasks()
-        self.canvas.config(scrollregion=self.canvas.bbox(self.windows_item))
+#---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+# import tkinter as tk
+# from tkinter import ttk
+
+# class Scrollable(tk.Frame):
+#     """
+#        Make a frame scrollable with scrollbar on the right.
+#        After adding or removing widgets to the scrollable frame, 
+#        call the update() method to refresh the scrollable area.
+#     """
+
+#     def __init__(self, frame, width=16):
+
+#         scrollbar = tk.Scrollbar(frame, width=width)
+#         scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand=False)
+
+#         self.canvas = tk.Canvas(frame, yscrollcommand=scrollbar.set)
+#         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+#         scrollbar.config(command=self.canvas.yview)
+
+#         self.canvas.bind('<Configure>', self.__fill_canvas)
+
+#         # base class initialization
+#         tk.Frame.__init__(self, frame)         
+
+#         # assign this obj (the inner frame) to the windows item of the canvas
+#         self.windows_item = self.canvas.create_window(0,0, window=self, anchor=tk.NW)
+
+
+#     def __fill_canvas(self, event):
+#         "Enlarge the windows item to the canvas width"
+
+#         canvas_width = event.width
+#         self.canvas.itemconfig(self.windows_item, width = canvas_width)        
+
+#     def update(self):
+#         "Update the canvas and the scrollregion"
+
+#         self.update_idletasks()
+#         self.canvas.config(scrollregion=self.canvas.bbox(self.windows_item))
 
         
-root = tk.Tk()
+# root = tk.Tk()
 
-header = ttk.Frame(root)
-body = ttk.Frame(root)
-footer = ttk.Frame(root)
-header.pack()
-body.pack()
-footer.pack()
+# header = ttk.Frame(root)
+# body = ttk.Frame(root)
+# footer = ttk.Frame(root)
+# header.pack()
+# body.pack()
+# footer.pack()
 
-ttk.Label(header, text="The header").pack()
-ttk.Label(footer, text="The Footer").pack()
+# ttk.Label(header, text="The header").pack()
+# ttk.Label(footer, text="The Footer").pack()
 
 
-scrollable_body = Scrollable(body, width=32)
+# scrollable_body = Scrollable(body, width=32)
 
-for i in range(30):
-    ttk.Button(scrollable_body, text="I'm a button in the scrollable frame").grid()
+# for i in range(30):
+#     ttk.Button(scrollable_body, text="I'm a button in the scrollable frame").grid()
 
-scrollable_body.update()
+# scrollable_body.update()
 
-root.mainloop()
+# root.mainloop()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 # from tkinter import *
