@@ -6,7 +6,7 @@ from mysql import connector
 from concurrent import futures
 import threading as t
 
-class  myThread (t.Thread):
+class myThread(t.Thread):
     def __init__(self, fileName = "none"):
         t.Thread.__init__(self)
         self.fn = fileName
@@ -17,39 +17,40 @@ class  myThread (t.Thread):
        
 
 class AllMainFunctions:
+
+    objj = myThread()
     
     def callBack(self, val):
-        
+
+        # check = True
+        # check2 = True
+        self.objj = myThread()
+
         if val == 1:
             
             filename = "Python\MedicalManagement.py"   
-            
-            if self.objc.isAlive():
-                messagebox.showerror("Error","Window Is Already Open!")
-            else:
-                self.objc = myThread(filename)
-                self.objc.start()
+            self.objj = myThread(filename)
+            # check = True
+            # check2 = False
+            self.objj.start()
            
 
         elif val == 2:
             filename = "Python\RecordDisplay.py"
+            self.objj = myThread(filename)
+            # check = True
+            # check2 = False
+            self.objj.start()
 
-            if self.objc2.isAlive():
-                messagebox.showerror("Error","Window Is Already Open!")
-            else:
-                self.objc2 = myThread(filename)
-                self.objc2.start()
-
-        else:
-            if self.objc.isAlive() or self.objc2.isAlive():
+        if val == 3:
+            if self.objj.isAlive():
                 messagebox.showerror("Error","Close All The Tabs!")
+                # check2 = False
             else:
-                exit()
+                # exit()
+                os._exit(0)
 
     def Buttons(self):
-
-        self.objc = myThread()
-        self.objc2 = myThread()
 
         btn = Button(root, text = "Insert New Patient Details", bd = 6, font = ("Open Sans", 16), command = lambda: self.callBack(1))
         btn.pack()
@@ -112,18 +113,10 @@ class AllMainFunctions:
         self.btn.pack()
         self.btn.place(x = 220, y = 300)
 
-        root.protocol("WM_DELETE_WINDOW", self.__callback)
-
-    def __callback(self):
-        pass
-
 root = Tk()
 root.resizable(0,0)
 root.title("Patient Medical Report")
 root.geometry("500x550")
-
-# root.overrideredirect(True)
-
 
 # Gets the requested values of the height and widht.
 windowWidth = root.winfo_reqwidth()
@@ -136,6 +129,11 @@ positionDown = int(root.winfo_screenheight()/3 - windowHeight)
  
 # Positions the window in the center of the page.
 root.geometry("+{}+{}".format(positionRight, positionDown))
+
+# def disable_event():
+    # pass
+
+# root.protocol("WM_DELETE_WINDOW", disable_event)
 
 lbl11 = Label(root, text = "Patient Health Management System", font = ("Times New Roman", 22)) 
 lbl11.place(x = 50, y = 25)  

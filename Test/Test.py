@@ -1,8 +1,10 @@
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import mysql as my
 from mysql import connector
+from tkinter import *
 
 def show():
 
@@ -19,22 +21,76 @@ def show():
     #     (1716, '12.12', 123456789, 'B-', 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12, 12.12),
     #     (1971, 'asdasd', 123465789, 'A+', 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12, 124.12)
     # ]
+    try:
+        op = open("Password\pass.txt")
+        usr = op.readline().replace('\n','')
+        pwd = op.readline().replace('\n','')
 
-    for i, (name, score, a, b, c, d, e, f, g, h, i ,j , k, l ) in enumerate(tempList, start=1):
-        listBox.insert("", "end", values=(i, name, score, a, b, c, d, e, f, g, h, i ,j , k, l))
+        mydb = my.connector.connect(host="127.0.0.1", user=usr, password=pwd, database="patient")
+
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM patient")
+        result = cur.fetchall()
+
+    except Exception as e:
+        error = """Check Your Connection
+        1. MySQL Servers
+        2. User-ID or Password maybe incorrect
+        3. Re-Connect using diffrent User-Id and Password
+        
+    {}""".format(e)
+        print(e)
+        messagebox.showerror("Error",error)
+        exit()
+
+    count = 1
+    for i, (name, score, a, b, c, d, e, f, g, h, i ,j , k, l ) in enumerate(result, start=1):
+        listBox.insert('', END, values=(count, name, score, a, b, c, d, e, f, g, h, i ,j , k, l))
+        count += 1
+
+    # listBox.geometry("0x0")
+    # listBox.config(anchor=CENTER)
+
+    # listBox.config(yscrollcommand=scrollbar.set)
+    # scrollbar.config(command=listBox.yview)
+    
 
 scores = tk.Tk() 
-label = tk.Label(scores, text="High Scores", font=("Arial",30)).grid(row=0, columnspan=3)
+
+scrollbar = Scrollbar(scores)
+# scrollbar.grid(row = 2, column = 3)  
+scrollbar.grid()
+
+
+label = tk.Label(scores, text="Patient Details", font=("Arial",30)).grid(row=0, columnspan=3)
 # create Treeview with 3 columns
-cols = ('Position', 'Name', 'Score','Hello Assehole','Hello Asshoale','Hello Assdhole','Hello Asshgole','Helloh Asshole','Hello Assfhole','Hello Adesshoale','Hello Aetssdhole','Hellgdo Assshgole','Helloh Aasshole','Hello Aasssfhole')
+cols = ('No', 'Patirnt ID', 'Name', 'Phone No', 'Blood Group', 'F B S', 'P P B S', 'B P', 'Creatinine', 'T3', 'T4', 'T S H', 'A S T', 'A L T', 'A L P')
 listBox = ttk.Treeview(scores, columns=cols, show='headings')
+
+style = ttk.Style(scores)
+style.configure('Treeview', rowheight=60)
 # set column headings
 for col in cols:
     listBox.heading(col, text=col)    
-listBox.grid(row=1, column=0, columnspan=1)
+listBox.grid(row=1, column=0, columnspan=3)
+
+
+
+# listBox.grid(row=2,column=0,padx=5,pady=5,sticky='nsew',side = LEFT )   
+# listBox.pack( ) 
+# listBox.pack(expand=True)
+
+scores.state('zoomed')
+# listBox.state('zoomed')
+# listBox.configure(justify=RIGHT)
+
+scores.geometry("0x0")
 
 showScores = tk.Button(scores, text="Show scores", width=15, command=show).grid(row=4, column=0)
 closeButton = tk.Button(scores, text="Close", width=15, command=exit).grid(row=4, column=1)
+
+listBox.config(yscrollcommand=scrollbar.set)
+scrollbar.config(command=listBox.yview)
 
 scores.mainloop()
 

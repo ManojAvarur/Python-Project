@@ -31,9 +31,6 @@ def pnt(event):
     print(Listbox.item(listBox.selection()))
 
 
-
-
-# Start ---------------------------------------------------------
 try:
         op = open("Password\pass.txt")
         usr = op.readline().replace('\n','')
@@ -61,17 +58,37 @@ except Exception as e:
 
 
 
-
+# Start ---------------------------------------------------------
 root = Tk()
 
 frame1 = Frame(root)
+# top_frame = tk.Frame(root)
+    # top_frame.pack(sid="top")
+    # bot_frame = tk.Frame(root)
+    # bot_frame.pack(sid="bottom")
 
+    # tk.Label(top_frame, text="Row 0 of top_frame").grid(row=0, column=0)
+
+    # tk.Label(bot_frame, text="Row 0 of bot_frame").grid(row=0, column=0)
+    # tk.Label(bot_frame, text="Row 1 of bot_frame").grid(row=1, column=0)
+    # tk.Label(bot_frame, text="Row 2 of bot_frame").grid(row=2, column=0)
+    # tk.Button(bot_frame, text="Row 3 of bot_frame").grid(row=3, column=0)
 
 frame1 = Frame(root)
 frame1.pack(fill=BOTH, expand=True)
 
 frame2 = Frame(root)
 frame2.pack(side=tk.BOTTOM, fill=tk.X)
+
+
+# frame1.grid(row=0,column=0,sticky='nsew')
+    # frame1.columnconfigure(0,weight=0)
+    # frame1.rowconfigure(0,weight=0)
+        # frame1.pack(fill=BOTH,expand=1)
+
+    # listbox = Listbox(frame1)
+        # listbox.grid(row=0,column=0,padx=5,pady=5,sticky='nsew')
+        # listbox.config(width=50,height=10)
 
 style = ttk.Style(frame1)
 style.configure('Treeview.Heading',  font = ('Times New Roman',20,'bold'), bd =  5)
@@ -91,6 +108,10 @@ listBox.pack(fill=BOTH,expand=1)
 
 
 Display(listBox)
+
+# Listbox.bind('<Button-1>', pnt)
+# Listbox.bind('<Double-1>', quit) 
+
 
 scrollH = tk.Scrollbar(frame2, orient=tk.HORIZONTAL)
 scrollH.config(command=listBox.xview)
