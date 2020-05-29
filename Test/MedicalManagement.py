@@ -242,7 +242,7 @@ try:
     usr = "root"#input("Enter User Name : ")
     # pwd = "root"#input("Enter The Password : ")
     # pwd = ""
-    op = open("Password\pass.txt")
+    op = open("bin\pass.txt")
     pwd = op.read()
 
     mydb = my.connector.connect(host="127.0.0.1", user=usr, password=pwd , database="patient")

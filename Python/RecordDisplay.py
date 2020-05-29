@@ -4,6 +4,15 @@ from tkinter import messagebox
 import mysql as my
 from mysql import connector
 from tkinter import *
+import os
+import threading as t
+
+class myThread(t.Thread):
+    def __init__(self):
+        t.Thread.__init__(self)
+    
+    def run(self):
+        os.system("Python\PatientRecordDisplay.py")
 
 class Display:
     
@@ -24,18 +33,28 @@ class Display:
         self.listBox.bind('<Double-1>', self.selection)
 
     def selection(self, event):
-        print( self.listBox.item(self.listBox.selection())['values'][1] )
 
-    
-def pnt(event):
-    print(Listbox.item(listBox.selection()))
+        temp = str(self.listBox.item(self.listBox.selection())['values'][1])
+
+        if os.path.exists("bin/recordDisp.txt"):
+            os.remove("bin/recordDisp.txt")
+
+        op = open('bin/recordDisp.txt','w')
+        op.write(temp)
+        op.close() 
+
+        tobj = myThread()
+        tobj.start()
+        # print( self.listBox.item(self.listBox.selection())['values'][1] )
+
+
 
 
 
 
 # Start ---------------------------------------------------------
 try:
-        op = open("Password\pass.txt")
+        op = open("bin\pass.txt")
         usr = op.readline().replace('\n','')
         pwd = op.readline().replace('\n','')
 
@@ -77,7 +96,7 @@ style = ttk.Style(frame1)
 style.configure('Treeview.Heading',  font = ('Times New Roman',20,'bold'), bd =  5)
 style.configure('Treeview', rowheight=60, font = ('Times New Roman',16))
 
-cols = ('No', 'Patirnt ID', 'Name', 'Phone No', 'Blood Group', 'F B S', 'P P B S', 'B P', 'Creatinine', 'T3', 'T4', 'T S H', 'A S T', 'A L T', 'A L P', 'Select')
+cols = ('No', 'Patirnt ID', 'Name', 'Phone No', 'Blood Group', 'F B S', 'P P B S', 'B P', 'Creatinine', 'T3', 'T4', 'T S H', 'A S T', 'A L T', 'A L P')
 listBox = ttk.Treeview(frame1, columns=cols, show='headings')
 
 

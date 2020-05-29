@@ -239,7 +239,7 @@ class AllMainFunctions:
     
 
 try:
-    op = open("Password\pass.txt")
+    op = open("bin\pass.txt")
     usr = op.readline().replace('\n','')
     pwd = op.readline().replace('\n','')
 

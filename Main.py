@@ -77,10 +77,10 @@ class AllMainFunctions:
             self.txtfld_2.destroy()
             self.btn.destroy()
 
-            if os.path.exists("Password\pass.txt"):
-                os.remove("Password\pass.txt")
+            if os.path.exists("bin\pass.txt"):
+                os.remove("bin\pass.txt")
 
-            op = open('Password\pass.txt','w')
+            op = open('bin\pass.txt','w')
             op.write(ud)
             op.write("\n")                   
             op.write(pd)
