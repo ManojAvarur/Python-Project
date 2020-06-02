@@ -76,6 +76,7 @@ class AllMainFunctions:
             self.txtfld_1.destroy()
             self.txtfld_2.destroy()
             self.btn.destroy()
+            self.btn1.destroy()
 
             if os.path.exists("bin\pass.txt"):
                 os.remove("bin\pass.txt")
@@ -110,7 +111,11 @@ class AllMainFunctions:
 
         self.btn = Button(root, text = "Submit", bd = 6, font = ("Open Sans", 16), command = self.validate)
         self.btn.pack()
-        self.btn.place(x = 220, y = 300)
+        self.btn.place(x = 220, y = 300, width = 100)
+
+        self.btn1 = Button(root, text = "Exit", bd = 6, font = ("Open Sans", 16), command = exit)
+        self.btn1.pack()
+        self.btn1.place(x = 220, y = 380, width = 100)
 
         root.protocol("WM_DELETE_WINDOW", self.__callback)
 
@@ -132,7 +137,7 @@ windowHeight = root.winfo_reqheight()
  
 # Gets both half the screen width/height and window width/height
 positionRight = int(root.winfo_screenwidth()/2 - windowWidth)
-positionDown = int(root.winfo_screenheight()/3 - windowHeight)
+positionDown = int(root.winfo_screenheight()/2 - windowHeight)
  
 # Positions the window in the center of the page.
 root.geometry("+{}+{}".format(positionRight, positionDown))

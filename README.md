@@ -1,4 +1,4 @@
-# Python-Project {STILL UNDER DEVELOPMENT}
+# Python-Project
 
 milligrams (mg) per deciliter (dL) = mg/dl                                  *FBS, PPBS* 
 millimeters (mm) of mercury (Hg) = mm Hg                                    *BP*
