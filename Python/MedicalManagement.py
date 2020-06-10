@@ -3,6 +3,8 @@ from tkinter import messagebox
 from random import randint as ri
 import mysql as my
 from mysql import connector
+from tkinter import PhotoImage
+import speech_recognition as sr
 
 class AllMainFunctions:
 
@@ -136,6 +138,12 @@ class AllMainFunctions:
             self.txtfld_1 = Entry(window, bd = 1.5, font = ("Times New Roman", 16))
             self.txtfld_1.place(x = 790, y = 98, height = 25, width = 200)
 
+            # icon1 = PhotoImage(file="F:/Studies/6/Project/Done With PY PROJ/Python-Project/bin/mic.png")
+            # icon1 = icon1.subsample(20, 20) 
+            # micbtn = Button(window, text="asdfasdf", image=icon1, command=None)#, relief = FLAT) 
+            # micbtn.pack() 
+            # micbtn.place(x = 980, y = 98)
+
         # ---------------------------------- Second Row -----------------------------------------------------------------
             lbl = Label(window, text = "Phone No : ", font = ("Times New Roman", 20))
             lbl.place(x = 105, y = 150)
@@ -236,7 +244,22 @@ class AllMainFunctions:
             Btn.pack()
             Btn.place(x = 580, y = 460, height = 50, width = 100)
 
+    def speech(self, place):
+        try:
+            recog = sr.Recognizer()
+
+            with sr.Microphone() as source:
+                audio = recog.record( source, duration = 5 )
+
+            if place == 1:
+                self.txtfld_1.insert(0,recog.recognize_google(audio))
+            elif place == 2:
+                self.txtfld_2.insert(0,recog.recognize_google(audio))
+        except:
+            messagebox.showerror('Error','Sorry I din\'t get you! \n Please Try Again.')
     
+
+
 
 try:
     op = open("bin\pass.txt")
@@ -257,7 +280,7 @@ except Exception as e:
 
 window = Tk()
 window.resizable(0,0)
-AllMainFunctions(window)
+obj = AllMainFunctions(window)
 window.title("Patient Medical Report")
 window.geometry("1050x550")
 
@@ -271,5 +294,16 @@ positionDown = int(window.winfo_screenheight()/3 - windowHeight)
  
 # Positions the window in the center of the page.
 window.geometry("+{}+{}".format(positionRight, positionDown))
+
+
+icon1 = PhotoImage(file="bin/mic.png")
+icon1 = icon1.subsample(20, 25) 
+micbtn = Button(window, text="Mic1", image=icon1, command = lambda: obj.speech(1), relief = FLAT, padx = -2, pady = -2) 
+micbtn.pack() 
+micbtn.place(x = 995, y = 98, height = 25, width = 20)
+
+micbtn1 = Button(window, text="Mic2", image=icon1, command = lambda: obj.speech(2), relief = FLAT, padx = -2, pady = -2) 
+micbtn1.pack() 
+micbtn1.place(x = 445, y = 158, height = 25, width = 20)
 
 window.mainloop()
